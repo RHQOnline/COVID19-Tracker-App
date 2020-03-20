@@ -61,10 +61,10 @@ def menu():
     recoveries = parse['recovered']
     deaths_to_recovered = (deaths/recoveries)*100
 
-    print(cld(getFmtDate(), "green"), cld(getFmtTime(), "green"), cld("[DATA]", "green"), cld("Current Confirmed Cases       : {:,}".format(cases)))
-    print(cld(getFmtDate(), "green"), cld(getFmtTime(), "green"), cld("[DATA]", "green"), cld("Current Confirmed Deaths      : {:,}".format(deaths)))
-    print(cld(getFmtDate(), "green"), cld(getFmtTime(), "green"), cld("[DATA]", "green"), cld("Current Confirmed Recoveries  : {:,}".format(recoveries)))
-    print(cld(getFmtDate(), "green"), cld(getFmtTime(), "green"), cld("[DATA]", "green"), cld("Death-to-Recovery Ratio       : %s%%" % format("%.2f" % deaths_to_recovered)))
+    print(cld(getFmtDate(), "green"), cld(getFmtTime(), "green"), cld("[DATA]", "green"), cld("Current Confirmed Cases       :   {:,}".format(cases)))
+    print(cld(getFmtDate(), "green"), cld(getFmtTime(), "green"), cld("[DATA]", "green"), cld("Current Confirmed Deaths      :   {:,}".format(deaths)))
+    print(cld(getFmtDate(), "green"), cld(getFmtTime(), "green"), cld("[DATA]", "green"), cld("Current Confirmed Recoveries  :   {:,}\n".format(recoveries)))
+    print(cld(getFmtDate(), "green"), cld(getFmtTime(), "green"), cld("[DATA]", "green"), cld("Death-to-Recovery Ratio       :   %s%%" % format("%.2f" % deaths_to_recovered)))
     print("")
     countryToFind = str(input("~search@: "))
     print("")
@@ -117,17 +117,17 @@ def displaySearchResults(country, cases, deaths, recovered, active, critical, ca
 
     deaths_to_recovered = (deaths/recovered)*100
 
-    print(cld("[DATA]", "green"), cld("Country in Question         : %s" % country))
-    print(cld("[DATA]", "green"), cld("--------------------------------------------"))
-    print(cld("[DATA]", "green"), cld("Total Confirmed Cases       : {:,}".format(cases)))
-    print(cld("[DATA]", "green"), cld("Total Cases Today           : {:,}".format(tdCases)))
-    print(cld("[DATA]", "green"), cld("Total Confirmed Deaths      : {:,}".format(deaths)))
-    print(cld("[DATA]", "green"), cld("Total Deaths Today          : {:,}".format(tdDeaths)))
-    print(cld("[DATA]", "green"), cld("Total Confirmed Recoveries  : {:,}".format(recovered)))
-    print(cld("[DATA]", "green"), cld("--------------------------------------------"))
-    print(cld("[DATA]", "green"), cld("Total Active Cases          : {:,}".format(active)))
-    print(cld("[DATA]", "green"), cld("Total in Critical Condition : {:,}".format(critical)))
-    print(cld("[DATA]", "green"), cld("Cases per One Million       : {:,}".format(casesPOM)))
+    print(cld("[DATA]", "green"), cld("Country in Question         :   %s" % country))
+    print(cld("[DATA]", "green"), cld("----------------------------------------------"))
+    print(cld("[DATA]", "green"), cld("Total Confirmed Cases       :   {:,}".format(cases)))
+    print(cld("[DATA]", "green"), cld("Total Cases Today           :   {:,}".format(tdCases)))
+    print(cld("[DATA]", "green"), cld("Total Confirmed Deaths      :   {:,}".format(deaths)))
+    print(cld("[DATA]", "green"), cld("Total Deaths Today          :   {:,}".format(tdDeaths)))
+    print(cld("[DATA]", "green"), cld("Total Confirmed Recoveries  :   {:,}".format(recovered)))
+    print(cld("[DATA]", "green"), cld("----------------------------------------------"))
+    print(cld("[DATA]", "green"), cld("Total Active Cases          :   {:,}".format(active)))
+    print(cld("[DATA]", "green"), cld("Total in Critical Condition :   {:,}".format(critical)))
+    print(cld("[DATA]", "green"), cld("Cases per One Million       :   {:,}".format(casesPOM)))
 
     print(cld("\n\n[RHQOnline]", "green"), cld("Press any key to try again, or 'CTRL+C' to exit..."))
     pause(0)
