@@ -130,7 +130,7 @@ def displaySearchResults(country, cases, deaths, recovered, active, critical, ca
     print(cld("[DATA]", "green"), cld("Cases per One Million       :   {:,}".format(casesPOM)))
 
     print(cld("\n\n[RHQOnline]", "green"), cld("Press any key to try again, or 'CTRL+C' to exit..."))
-    pause(0)
+    pause(1)
     menu()
 
 def checkForExceptions(country):
