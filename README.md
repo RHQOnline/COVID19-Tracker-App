@@ -12,5 +12,15 @@ The program (at this time) throws a false-flag detection on most antiviruses. Th
 
 ## Changelog
 ```
+ - v1.2.9 Release
+   - Hotfix: Fixed Mortality Rate Being **TOO HIGH**
+ - v1.2.7 Release
+   - Security Improvements
+   - Fixed Crashing
+   - Bugfixes
+   - Fixed Formatting
+   - Implemented Timing
+   - Citations
  - v1.0.0 Release
+   - Initial Release
 ```
