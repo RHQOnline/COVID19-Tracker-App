@@ -12,6 +12,8 @@ The program (at this time) throws a false-flag detection on most antiviruses. Th
 
 ## Changelog
 ```
+ - v1.3.3 Release
+   - Fixed Infection Rate
  - v1.3.1 Release
    - Changed Mortality Rate to Fatality Rate
    - Added Total Country Population
