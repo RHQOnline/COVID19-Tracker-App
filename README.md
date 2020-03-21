@@ -12,6 +12,10 @@ The program (at this time) throws a false-flag detection on most antiviruses. Th
 
 ## Changelog
 ```
+ - v1.3.1 Release
+   - Changed Mortality Rate to Fatality Rate
+   - Added Total Country Population
+   - Added Total Country Infection Rate
  - v1.2.9 Release
    - Hotfix: Fixed Mortality Rate Being **TOO HIGH**
  - v1.2.7 Release
