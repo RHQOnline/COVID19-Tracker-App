@@ -62,7 +62,7 @@ def menu():
     cases = parse['cases']
     deaths = parse['deaths']
     recoveries = parse['recovered']
-    deaths_to_recovered = (deaths/recoveries)*100
+    mortalityRatio = (deaths/(deaths+recoveries))*100
 
     end_timer = time()
     timerSub = end_timer - start_timer
@@ -72,7 +72,7 @@ def menu():
     print(cld(getFmtDate(), "green"), cld(getFmtTime(), "green"), cld("[DATA]", "green"), cld("Current Confirmed Cases       :   {:,}".format(cases)))
     print(cld(getFmtDate(), "green"), cld(getFmtTime(), "green"), cld("[DATA]", "green"), cld("Current Confirmed Deaths      :   {:,}".format(deaths)))
     print(cld(getFmtDate(), "green"), cld(getFmtTime(), "green"), cld("[DATA]", "green"), cld("Current Confirmed Recoveries  :   {:,}\n".format(recoveries)))
-    mortalityRate = format("%.2f" % deaths_to_recovered)
+    mortalityRate = format("%.2f" % mortalityRatio)
     print(cld(getFmtDate(), "green"), cld(getFmtTime(), "green"), cld("[DATA]", "green"), cld("Rounded Mortality Ratio       :   %s%%" % mortalityRate))
     print("")
     countryToFind = str(input("~search@: "))
@@ -237,10 +237,10 @@ def displaySearchResults(country, cases, deaths, recovered, active, critical, ca
     print(cld("[RHQOnline]", "green"), cld("You are fetching this dataset at %s on %s.\n\n" % (getFmtTime(), getFmtDate())))
 
     try:
-        deaths_to_recovered = (deaths/recovered)*100
+        mortalityRatio = (deaths/(deaths+recovered))*100
     except ZeroDivisionError as zde:
         print(cld(getFmtDate(), "green"), cld(getFmtTime(), "green"), cld("[ERROR]", "red"), cld("%s - Mortality Rate cannot be obtained. [0 recoveries in region.]\n" % zde))
-        deaths_to_recovered = 0
+        mortalityRatio = 0
 
     # deaths_to_recovered = (deaths/recovered)*100
 
@@ -256,7 +256,7 @@ def displaySearchResults(country, cases, deaths, recovered, active, critical, ca
     print(cld("[DATA]", "green"), cld("Total in Critical Condition :   {:,}".format(critical)))
     print(cld("[DATA]", "green"), cld("Cases per One Million       :   {:,}".format(casesPOM)))
     print(cld("[DATA]", "green"), cld("----------------------------------------------"))
-    mortalityRate = format("%.2f" % deaths_to_recovered)
+    mortalityRate = format("%.2f" % mortalityRatio)
     print(cld("[DATA]", "green"), cld("Rounded Mortality Ratio     :   %s%%" % mortalityRate))
 
     print(cld("\n\n[RHQOnline]", "green"), cld("Press any key to try again, or 'CTRL+C' to exit..."))
