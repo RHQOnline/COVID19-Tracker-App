@@ -261,7 +261,7 @@ def displaySearchResults(country, cases, deaths, recovered, active, critical, ca
     print(cld("[DATA]", "green"), cld("Cases per One Million        :   {:,}".format(casesPOM)))
     print(cld("[DATA]", "green"), cld("---------------------------------------------------"))
     mortalityRate = format("%.2f" % mortalityRatio)
-    print(cld("[DATA]", "green"), cld("Rounded Infection Ratio      :   %s%%" % infectionRateDisplay))
+    print(cld("[DATA]", "green"), cld("Rounded Infection Ratio      :  "), cld("[DISABLED]", "red"))
     print(cld("[DATA]", "green"), cld("Rounded Fatality  Ratio      :   %s%%" % mortalityRate))
 
     print(cld("\n\n[RHQOnline]", "green"), cld("Press any key to try again, or 'CTRL+C' to exit..."))
