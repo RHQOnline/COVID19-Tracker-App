@@ -1,6 +1,4 @@
 ## Imports
-import discord
-from discord.ext import commands, tasks
 import sys
 from os import system, listdir, getcwd
 from random import randint, randrange
