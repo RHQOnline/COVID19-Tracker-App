@@ -71,7 +71,7 @@ def menu():
     print(cld(getFmtDate(), "green"), cld(getFmtTime(), "green"), cld("[DATA]", "green"), cld("Current Confirmed Deaths      :   {:,}".format(deaths)))
     print(cld(getFmtDate(), "green"), cld(getFmtTime(), "green"), cld("[DATA]", "green"), cld("Current Confirmed Recoveries  :   {:,}\n".format(recoveries)))
     mortalityRate = format("%.2f" % mortalityRatio)
-    print(cld(getFmtDate(), "green"), cld(getFmtTime(), "green"), cld("[DATA]", "green"), cld("Rounded Mortality Ratio       :   %s%%" % mortalityRate))
+    print(cld(getFmtDate(), "green"), cld(getFmtTime(), "green"), cld("[DATA]", "green"), cld("Rounded Fatality  Ratio       :   %s%%" % mortalityRate))
     print("")
     countryToFind = str(input("~search@: "))
     print("")
@@ -240,9 +240,13 @@ def displaySearchResults(country, cases, deaths, recovered, active, critical, ca
         print(cld(getFmtDate(), "green"), cld(getFmtTime(), "green"), cld("[ERROR]", "red"), cld("%s - Mortality Rate cannot be obtained. [0 recoveries in region.]\n" % zde))
         mortalityRatio = 0
 
+    countryPop = format("%.2f" % (cases/casesPOM))
+    infectionRate = format("%.2f" % ((cases/countryPop)*100))
+        
     # deaths_to_recovered = (deaths/recovered)*100
 
     print(cld("[DATA]", "green"), cld("Country in Question         :   %s" % country))
+    print(cld("[DATA]", "green"), cld("Total Population of Country :   %s Million" % countryPop))
     print(cld("[DATA]", "green"), cld("----------------------------------------------"))
     print(cld("[DATA]", "green"), cld("Total Confirmed Cases       :   {:,}".format(cases)))
     print(cld("[DATA]", "green"), cld("Total Cases Today           :   {:,}".format(tdCases)))
@@ -255,7 +259,8 @@ def displaySearchResults(country, cases, deaths, recovered, active, critical, ca
     print(cld("[DATA]", "green"), cld("Cases per One Million       :   {:,}".format(casesPOM)))
     print(cld("[DATA]", "green"), cld("----------------------------------------------"))
     mortalityRate = format("%.2f" % mortalityRatio)
-    print(cld("[DATA]", "green"), cld("Rounded Mortality Ratio     :   %s%%" % mortalityRate))
+    print(cld("[DATA]", "green"), cld("Rounded Infection Ratio     :   %s%%" % infectionRate))
+    print(cld("[DATA]", "green"), cld("Rounded Fatality  Ratio     :   %s%%" % mortalityRate))
 
     print(cld("\n\n[RHQOnline]", "green"), cld("Press any key to try again, or 'CTRL+C' to exit..."))
     pause(1)
