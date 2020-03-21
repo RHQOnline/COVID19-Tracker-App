@@ -242,24 +242,24 @@ def displaySearchResults(country, cases, deaths, recovered, active, critical, ca
 
     countryPop = (cases/casesPOM)
     countryPopDisplay = format("%.2f" % countryPop)
-    infectionRate = (countryPop/cases)*100
-    infectionRateDisplay = format("%.2f" % infectionRate)
+    infectionRate = (cases/countryPop)*100
+    infectionRateDisplay = format("%.5f" % infectionRate)
 
     # deaths_to_recovered = (deaths/recovered)*100
 
     print(cld("[DATA]", "green"), cld("Country in Question          :   %s" % country))
     print(cld("[DATA]", "green"), cld("Total Population of Country  :   %s Million" % countryPopDisplay))
-    print(cld("[DATA]", "green"), cld("-------------------------------------------------"))
+    print(cld("[DATA]", "green"), cld("---------------------------------------------------"))
     print(cld("[DATA]", "green"), cld("Total Confirmed Cases        :   {:,}".format(cases)))
     print(cld("[DATA]", "green"), cld("Total Cases Today            :   {:,}".format(tdCases)))
     print(cld("[DATA]", "green"), cld("Total Confirmed Deaths       :   {:,}".format(deaths)))
     print(cld("[DATA]", "green"), cld("Total Deaths Today           :   {:,}".format(tdDeaths)))
     print(cld("[DATA]", "green"), cld("Total Confirmed Recoveries   :   {:,}".format(recovered)))
-    print(cld("[DATA]", "green"), cld("-------------------------------------------------"))
+    print(cld("[DATA]", "green"), cld("---------------------------------------------------"))
     print(cld("[DATA]", "green"), cld("Total Active Cases           :   {:,}".format(active)))
     print(cld("[DATA]", "green"), cld("Total in Critical Condition  :   {:,}".format(critical)))
     print(cld("[DATA]", "green"), cld("Cases per One Million        :   {:,}".format(casesPOM)))
-    print(cld("[DATA]", "green"), cld("-------------------------------------------------"))
+    print(cld("[DATA]", "green"), cld("---------------------------------------------------"))
     mortalityRate = format("%.2f" % mortalityRatio)
     print(cld("[DATA]", "green"), cld("Rounded Infection Ratio      :   %s%%" % infectionRateDisplay))
     print(cld("[DATA]", "green"), cld("Rounded Fatality  Ratio      :   %s%%" % mortalityRate))
