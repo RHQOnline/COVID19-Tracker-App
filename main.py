@@ -70,6 +70,8 @@ def menu():
     print(cld(getFmtDate(), "green"), cld(getFmtTime(), "green"), cld("[DATA]", "green"), cld("Current Confirmed Cases       :   {:,}".format(cases)))
     print(cld(getFmtDate(), "green"), cld(getFmtTime(), "green"), cld("[DATA]", "green"), cld("Current Confirmed Deaths      :   {:,}".format(deaths)))
     print(cld(getFmtDate(), "green"), cld(getFmtTime(), "green"), cld("[DATA]", "green"), cld("Current Confirmed Recoveries  :   {:,}\n".format(recoveries)))
+    infectionRate = format("%.3f" % ((cases/7800000000)*100))
+    print(cld(getFmtDate(), "green"), cld(getFmtTime(), "green"), cld("[DATA]", "green"), cld("Rounded Infection Ratio       :   %s%%" % infectionRate))
     mortalityRate = format("%.2f" % mortalityRatio)
     print(cld(getFmtDate(), "green"), cld(getFmtTime(), "green"), cld("[DATA]", "green"), cld("Rounded Fatality  Ratio       :   %s%%" % mortalityRate))
     print("")
@@ -251,7 +253,7 @@ def displaySearchResults(country, cases, deaths, recovered, active, critical, ca
 
         countryPop = (cases/casesPOM)*1000000
         # countryPopDisplay = format("%:,.2f" % countryPop)
-        infectionRate = (cases/(countryPop*1000000))*100
+        infectionRate = (cases/(countryPop))*100
         infectionRateDisplay = format("%.4f" % infectionRate)
 
         # deaths_to_recovered = (deaths/recovered)*100

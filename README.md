@@ -12,6 +12,9 @@ The program (at this time) throws a false-flag detection on most antiviruses. Th
 
 ## Changelog
 ```
+ - v1.4.2 Release
+   - Once Again, Fixed Infection Rate (oops)
+   - Added Infection Rate to Global Statistics
  - v1.4.1 Release
    - Fixed Infection Rate
    - Cleaned Up Population Display
