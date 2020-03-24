@@ -227,46 +227,62 @@ def searchForCountry(country):
         timerDisplayFmt = format("%.2f" % (stop_timer - start_timer))
         displaySearchResults(country, cases, deaths, recovered, active, critical, casesPOM, tdCases, tdDeaths, timerDisplayFmt)
 
+def human_format(num):
+    magnitude = 0
+    while abs(num) >= 1000:
+        magnitude += 1
+        num /= 1000.0
+    # add more suffixes if you need them
+    return '%.2f %s' % (num, ['', 'Thousand', 'Million', 'Billion', 'Trillion', 'Pentillion'][magnitude])
+
 def displaySearchResults(country, cases, deaths, recovered, active, critical, casesPOM, tdCases, tdDeaths, timeDisplayFmt):
-    cls()
-    print(cld("[RHQOnline]", "green"), cld("The results displayed below are detailed, legitimate statistics."))
-    print(cld("[RHQOnline]", "green"), cld("The results are updated hourly via the CDC and WHO."))
-    print(cld("[RHQOnline]", "green"), cld("This dataset query took [%s seconds] to complete." % timeDisplayFmt))
-    print(cld("[RHQOnline]", "green"), cld("You are fetching this dataset at %s on %s.\n\n" % (getFmtTime(), getFmtDate())))
-
     try:
-        mortalityRatio = (deaths/(deaths+recovered))*100
-    except ZeroDivisionError as zde:
-        print(cld(getFmtDate(), "green"), cld(getFmtTime(), "green"), cld("[ERROR]", "red"), cld("%s - Mortality Rate cannot be obtained. [0 recoveries in region.]\n" % zde))
-        mortalityRatio = 0
+        cls()
+        print(cld("[RHQOnline]", "green"), cld("The results displayed below are detailed, legitimate statistics."))
+        print(cld("[RHQOnline]", "green"), cld("The results are updated hourly via the CDC and WHO."))
+        print(cld("[RHQOnline]", "green"), cld("This dataset query took [%s seconds] to complete." % timeDisplayFmt))
+        print(cld("[RHQOnline]", "green"), cld("You are fetching this dataset at %s on %s.\n\n" % (getFmtTime(), getFmtDate())))
 
-    countryPop = (cases/casesPOM)
-    countryPopDisplay = format("%.2f" % countryPop)
-    infectionRate = (cases/countryPop)*100
-    infectionRateDisplay = format("%.5f" % infectionRate)
+        try:
+            mortalityRatio = (deaths/(deaths+recovered))*100
+        except ZeroDivisionError as zde:
+            print(cld(getFmtDate(), "green"), cld(getFmtTime(), "green"), cld("[ERROR]", "red"), cld("%s - Mortality Rate cannot be obtained. [0 recoveries in region.]\n" % zde))
+            mortalityRatio = 0
 
-    # deaths_to_recovered = (deaths/recovered)*100
+        countryPop = (cases/casesPOM)*1000000
+        # countryPopDisplay = format("%:,.2f" % countryPop)
+        infectionRate = (cases/(countryPop*1000000))*100
+        infectionRateDisplay = format("%.4f" % infectionRate)
 
-    print(cld("[DATA]", "green"), cld("Country in Question          :   %s" % country))
-    print(cld("[DATA]", "green"), cld("Total Population of Country  :   %s Million" % countryPopDisplay))
-    print(cld("[DATA]", "green"), cld("---------------------------------------------------"))
-    print(cld("[DATA]", "green"), cld("Total Confirmed Cases        :   {:,}".format(cases)))
-    print(cld("[DATA]", "green"), cld("Total Cases Today            :   {:,}".format(tdCases)))
-    print(cld("[DATA]", "green"), cld("Total Confirmed Deaths       :   {:,}".format(deaths)))
-    print(cld("[DATA]", "green"), cld("Total Deaths Today           :   {:,}".format(tdDeaths)))
-    print(cld("[DATA]", "green"), cld("Total Confirmed Recoveries   :   {:,}".format(recovered)))
-    print(cld("[DATA]", "green"), cld("---------------------------------------------------"))
-    print(cld("[DATA]", "green"), cld("Total Active Cases           :   {:,}".format(active)))
-    print(cld("[DATA]", "green"), cld("Total in Critical Condition  :   {:,}".format(critical)))
-    print(cld("[DATA]", "green"), cld("Cases per One Million        :   {:,}".format(casesPOM)))
-    print(cld("[DATA]", "green"), cld("---------------------------------------------------"))
-    mortalityRate = format("%.2f" % mortalityRatio)
-    print(cld("[DATA]", "green"), cld("Rounded Infection Ratio      :  "), cld("[DISABLED]", "red"))
-    print(cld("[DATA]", "green"), cld("Rounded Fatality  Ratio      :   %s%%" % mortalityRate))
+        # deaths_to_recovered = (deaths/recovered)*100
 
-    print(cld("\n\n[RHQOnline]", "green"), cld("Press any key to try again, or 'CTRL+C' to exit..."))
-    pause(1)
-    menu()
+        countryPopDisplay = human_format(countryPop)
+
+        print(cld("[DATA]", "green"), cld("Country in Question          :   %s" % country))
+        print(cld("[DATA]", "green"), cld("Total Population of Country  :   %s" % countryPopDisplay))
+        print(cld("[DATA]", "green"), cld("---------------------------------------------------"))
+        print(cld("[DATA]", "green"), cld("Total Confirmed Cases        :   {:,}".format(cases)))
+        print(cld("[DATA]", "green"), cld("Total Cases Today            :   {:,}".format(tdCases)))
+        print(cld("[DATA]", "green"), cld("Total Confirmed Deaths       :   {:,}".format(deaths)))
+        print(cld("[DATA]", "green"), cld("Total Deaths Today           :   {:,}".format(tdDeaths)))
+        print(cld("[DATA]", "green"), cld("Total Confirmed Recoveries   :   {:,}".format(recovered)))
+        print(cld("[DATA]", "green"), cld("---------------------------------------------------"))
+        print(cld("[DATA]", "green"), cld("Total Active Cases           :   {:,}".format(active)))
+        print(cld("[DATA]", "green"), cld("Total in Critical Condition  :   {:,}".format(critical)))
+        print(cld("[DATA]", "green"), cld("Cases per One Million        :   {:,}".format(casesPOM)))
+        print(cld("[DATA]", "green"), cld("---------------------------------------------------"))
+        mortalityRate = format("%.4f" % mortalityRatio)
+        print(cld("[DATA]", "green"), cld("Rounded Infection Ratio      :   %s%%" % infectionRateDisplay)) # , cld("[DISABLED]", "red")
+        print(cld("[DATA]", "green"), cld("Rounded Fatality  Ratio      :   %s%%" % mortalityRate))
+
+        print(cld("\n\n[RHQOnline]", "green"), cld("Press any key to try again, or 'CTRL+C' to exit..."))
+        pause(1)
+        mainFxn()
+    except:
+        print(cld("\n" + getFmtDate(), "green"), cld(getFmtTime(), "green"), cld("[ERROR]", "red"), cld("An error occured whilst fetching / displaying the data.")) # f"{getFmtDate()} {getFmtTime()} - Something went wrong. Please try again."
+        print(cld(getFmtDate(), "green"), cld(getFmtTime(), "green"), cld("[ERROR]", "red"), cld("Press any key to try again..."))
+        pause(1)
+        mainFxn()
 
 def checkForExceptions(country):
     uaeStrings = ['united arab emirates', 'arab emirates', 'united arab', 'emirates', 'unitedarabemirates', 'the uae']
@@ -388,15 +404,18 @@ def checkForExceptions(country):
     else:
         return False
 
+def mainFxn():
+    try:
+        menu()
+    except KeyboardInterrupt:
+        print(cld("\n\n" + getFmtDate(), "green"), cld(getFmtTime(), "green"), cld("[INFO]", "yellow"), cld("Manual Hault Detected. Exiting..."))
+        pause(0)
+        qExit()
+    except:
+        print(cld("\n" + getFmtDate(), "green"), cld(getFmtTime(), "green"), cld("[ERROR]", "red"), cld("Invalid country entered. Please try again.")) # f"{getFmtDate()} {getFmtTime()} - Something went wrong. Please try again."
+        pause(0)
+        mainFxn()
+
 ## Script
 setTitle("RHQOnline's nCov COVID19 Tracker")
-try:
-    menu()
-except KeyboardInterrupt:
-    print(cld("\n\n" + getFmtDate(), "green"), cld(getFmtTime(), "green"), cld("[ERROR]", "red"), cld("Manual Hault Detected. Exiting..."))
-    pause(0)
-    qExit()
-except:
-    print(cld("\n" + getFmtDate(), "green"), cld(getFmtTime(), "green"), cld("[ERROR]", "red"), cld("Invalid country entered. Please try again.")) # f"{getFmtDate()} {getFmtTime()} - Something went wrong. Please try again."
-    pause(0)
-    menu()
+mainFxn()
